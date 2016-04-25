@@ -5,6 +5,7 @@ In the near future I intend to create a button to generate a .json file containi
 
 # Features
 Fast loading and saving times, even for huge files.
+
 Intuitive User Interface.
 
 # Dependencies
