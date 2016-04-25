@@ -64,7 +64,7 @@ namespace sm
             void saveSheetToFiles(sf::Image *image);
             void saveSelectedToFiles(const std::vector<int> *selectedSprites, sf::Image *image);
             void removeSingleSprite(int i);
-            void parseSpritesheet(std::string pathToFile,bool createAlpha = false);
+            void parseSpritesheet(bool createAlpha = false);
     };
 }
 

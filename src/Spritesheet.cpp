@@ -130,7 +130,7 @@ namespace sm{
     /**
      *  Find the spritesheet's sprites and it's boundaries.
      */
-    void Spritesheet::parseSpritesheet(std::string pathToFile, bool createAlpha)
+    void Spritesheet::parseSpritesheet(bool createAlpha)
     {
         transparentColor = sheetImage.getPixel(0,0); // Pick first color as transparent
         // Image pixels
@@ -155,7 +155,7 @@ namespace sm{
         // Try to load image, if it does not load don't parse the spritesheet and don't set the texture and sprite.
         if (sheetImage.loadFromFile(pathToFile)){
             // Loaded successfully
-            parseSpritesheet(pathToFile, createAlpha);
+            parseSpritesheet(createAlpha);
         }
         else {
             // Loading failed
@@ -169,12 +169,11 @@ namespace sm{
     void Spritesheet::saveSheetToFiles(sf::Image *image){
         sf::Image singleSprite;
         int width, height;
-        image = &sheetImage;
         for (int i=0; i<startBoundaries.size(); i++) {
             std::stringstream outputPath;
 
             // Sets path of the file to be saved. Adds 1 to it to avoid using index 0.
-            outputPath << "output/" << i+1 << ".jpg";
+            outputPath << "output/" << i+1 << ".png";
             width = endBoundaries.at(i).x - startBoundaries.at(i).x;
             height = endBoundaries.at(i).y - startBoundaries.at(i).y;
             singleSprite.create(width,height);
@@ -202,7 +201,7 @@ namespace sm{
             singleSprite.copy(*image,0,0,sf::IntRect(startBoundaries.at(selectedSprites->at(i)).x,startBoundaries.at(selectedSprites->at(i)).y,width,height));
             if (!singleSprite.saveToFile(outputPath.str()))
                 std::cout << "Failed to save file: ";
-            std::cout << selectedSprites->at(i)+1 << " " << outputPath.str() << " " << width << " " << height << std::endl;
+            std::cout << (selectedSprites->at(i)+1) << " " << outputPath.str() << " " << width << " " << height << std::endl;
         }
     }
 
@@ -211,10 +210,12 @@ namespace sm{
      */
     void Spritesheet::saveToFiles(const std::vector<int> *selectedSprites, sf::Image *image){
         // Check if there is any sprite selected
-        if (selectedSprites->size() > 0)
-            saveSelectedToFiles(selectedSprites, image);
-        else
-            saveSheetToFiles(image);
+        if (selectedSprites != nullptr){
+            if (selectedSprites->size() > 0)
+                saveSelectedToFiles(selectedSprites, image);
+            else
+                saveSheetToFiles(image);
+        }
     }
 
     /**

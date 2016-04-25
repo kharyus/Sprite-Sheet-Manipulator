@@ -30,7 +30,7 @@ namespace sm
             void draw(std::vector<int> *selectedSprites);
             void reset();
             void loadSpritesheet(std::string pathToFile, std::vector<int> *selectedSprites = nullptr);
-            void saveToFiles(const std::vector<int> *selectedSprites){ if (spritesheet != nullptr) spritesheet->saveToFiles(selectedSprites, spritesheet->getImage());}
+            void saveToFiles(std::vector<int> *selectedSprites){ if (spritesheet != nullptr) spritesheet->saveToFiles(selectedSprites, spritesheet->getImage());}
             void removeSprites(std::vector<int> *selectedSprites){spritesheet->removeSprites(selectedSprites);}
             void uniteSprites(std::vector<int> *selectedSprites){spritesheet->uniteSprites(selectedSprites);}
             void drawBoard(sf::View *currentView);
