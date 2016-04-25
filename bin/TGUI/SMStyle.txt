@@ -1,0 +1,8 @@
+Button {
+    NormalImage     : "button.png" Part( 0, 0, 205, 107) Middle(10, 0, 25, 50);
+    HoverImage      : "button.png" Part( 0, 0, 205, 107) Middle(10, 0, 25, 50);
+    DownImage       : "button2.png" Part( 0, 0, 205, 107) Middle(10, 0, 25, 50);
+    TextColorNormal : rgb(190, 190, 190);
+    TextColorHover  : rgb(250, 250, 250);
+    TextColorDown   : rgb(250, 250, 250);
+}

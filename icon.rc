@@ -1,0 +1,7 @@
+#ifndef RESOURCE_RC_INCLUDED
+#define RESOURCE_RC_INCLUDED
+
+// This is the executable icon of the program.
+MAINICON  ICON  "icon.ico"
+
+#endif // RESOURCE_RC_INCLUDED
