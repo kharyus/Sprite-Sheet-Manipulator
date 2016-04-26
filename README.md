@@ -2,7 +2,7 @@
 Sprite Sheet Manipulator detects the boundaries of individual sprites in a Sprite Sheet and then saves them to separate files in the output folder.
 
 # Features
-Fast loading and saving times, even for huge files.
+Lighting Fast loading and saving times, even for huge files.
 
 # Screenshot
 
