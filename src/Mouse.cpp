@@ -1,6 +1,4 @@
-#include "Mouse.hpp"
-
-#include "Logger.hpp"
+#include "Mouse.h"
 
 namespace sm
 {
@@ -78,8 +76,8 @@ namespace sm
      */
     bool Mouse::isInsideView(sf::Vector2i position)
     {
-        LOG(view->getViewportWindowEndPosition().x << " " << position.x);
-        LOG(view->getViewportWindowEndPosition().y << " " << position.y);
+        std::cout << view->getViewportWindowEndPosition().x << " " << position.x << std::endl;
+        std::cout << view->getViewportWindowEndPosition().y << " " << position.y << std::endl;
         if ((position.x >= view->getViewportWindowPosition().x &&
             position.y >= view->getViewportWindowPosition().y) &&
             (position.x < view->getViewportWindowEndPosition().x &&
@@ -164,6 +162,6 @@ namespace sm
             transparentMode = false;
         else
             transparentMode = true;
-        LOG("Mouse: Transparent Mode switched " << transparentMode);
+        std::cout << "Mouse: Transparent Mode switched " << transparentMode << std::endl;
     }
 }

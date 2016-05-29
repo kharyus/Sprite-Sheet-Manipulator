@@ -1,6 +1,4 @@
-#include "Spritesheet.hpp"
-
-#include "Logger.hpp"
+#include "Spritesheet.h"
 
 namespace sm{
 
@@ -161,7 +159,7 @@ namespace sm{
         }
         else {
             // Loading failed
-            LOG("Spritesheet: Couldn't load the image.");
+            std::cout << "Spritesheet: Couldn't load the image." << std::endl;
         }
     }
 
@@ -181,10 +179,8 @@ namespace sm{
             singleSprite.create(width,height);
             singleSprite.copy(*image,0,0,sf::IntRect(startBoundaries.at(i).x,startBoundaries.at(i).y,width,height));
             if (!singleSprite.saveToFile(outputPath.str()))
-            {
-                LOGNOBREAK("Failed to save file: ");
-            }
-            LOG(i+1 << " " << outputPath.str() << " " << width << " " << height);
+                std::cout << "Failed to save file: ";
+            std::cout << i+1 << " " << outputPath.str() << " " << width << " " << height << std::endl;
         }
     }
 
@@ -204,10 +200,8 @@ namespace sm{
             singleSprite.create(width,height);
             singleSprite.copy(*image,0,0,sf::IntRect(startBoundaries.at(selectedSprites->at(i)).x,startBoundaries.at(selectedSprites->at(i)).y,width,height));
             if (!singleSprite.saveToFile(outputPath.str()))
-            {
-                LOGNOBREAK("Failed to save file: ");
-            }
-            LOG((selectedSprites->at(i)+1) << " " << outputPath.str() << " " << width << " " << height);
+                std::cout << "Failed to save file: ";
+            std::cout << (selectedSprites->at(i)+1) << " " << outputPath.str() << " " << width << " " << height << std::endl;
         }
     }
 
@@ -244,13 +238,13 @@ namespace sm{
      *  Removes the selected sprites from the files to be saved.
      */
     void Spritesheet::removeSprites(std::vector<int> *selectedSprites){
-        LOG("Removed Sprites Total: " << selectedSprites->size());
+        std::cout << "Removed Sprites Total: " << selectedSprites->size() << std::endl;
         if (selectedSprites->size() > 0){
             for (int i = 0; i < selectedSprites->size(); i++){
                 // Erase the rectangle at the beginning of the array + the index of the selected sprite.
                 // Then you remove the number of times it has iterated because it's changing the index each iteration.
                 removeSingleSprite(selectedSprites->at(i)-i);
-                LOG("Removed sprite: " << selectedSprites->at(i)-i);
+                std::cout << "Removed sprite: " << selectedSprites->at(i)-i << std::endl;
             }
             selectedSprites->clear();
         }
@@ -265,7 +259,7 @@ namespace sm{
      *  @param smallest         The smallest value, it's passed by reference to acess the value from outside the class.
      */
     void Spritesheet::uniteSprites(std::vector<int> *selectedSprites){
-        LOG("United Sprites Total: " << selectedSprites->size());
+        std::cout << "United Sprites Total: " << selectedSprites->size() << std::endl;
         if (selectedSprites->size() > 1){
             // Verify and hold the smallest and biggest positions
             // Note: There is a catch in the implementation here, since every time the loop runs a position is deleted the vector index changes, so we need to subtract 1 for each iteration.
@@ -283,7 +277,7 @@ namespace sm{
                 if (endBoundaries.at(selectedSprites->at(i)-i).y > biggest.y )
                     biggest.y = endBoundaries.at(selectedSprites->at(i)-i).y;
                 removeSingleSprite(selectedSprites->at(i)-i);
-                LOG("United sprite: " << selectedSprites->at(i)-i);
+                std::cout << "United sprite: " << selectedSprites->at(i)-i << std::endl;
             }
             startBoundaries.push_back(smallest);
             endBoundaries.push_back(biggest);
