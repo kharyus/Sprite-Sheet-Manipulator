@@ -1,8 +1,8 @@
-#ifndef MOUSE_H
-#define MOUSE_H
+#ifndef MOUSE_HPP
+#define MOUSE_HPP
 
-#include "SpritesheetDisplayer.h"
-#include "SpritesheetView.h"
+#include "SpritesheetDisplayer.hpp"
+#include "SpritesheetView.hpp"
 
 /**
  *  This class manages mouse selection related to the program.
@@ -44,4 +44,4 @@ namespace sm
     };
 }
 
-#endif // MOUSE_H
+#endif // MOUSE_HPP

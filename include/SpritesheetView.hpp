@@ -1,5 +1,5 @@
-#ifndef SPRITESHEETVIEW_H
-#define SPRITESHEETVIEW_H
+#ifndef SPRITESHEETVIEW_HPP
+#define SPRITESHEETVIEW_HPP
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -32,4 +32,4 @@ namespace sm
     };
 }
 
-#endif // SPRITESHEETVIEW_H
+#endif // SPRITESHEETVIEW_HPP

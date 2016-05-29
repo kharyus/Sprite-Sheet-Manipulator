@@ -1,8 +1,7 @@
-#ifndef SPRITESHEET_H
-#define SPRITESHEET_H
+#ifndef SPRITESHEET_HPP
+#define SPRITESHEET_HPP
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <sstream>
 
 /**
@@ -68,4 +67,4 @@ namespace sm
     };
 }
 
-#endif // SPRITESHEET_H
+#endif // SPRITESHEET_HPP

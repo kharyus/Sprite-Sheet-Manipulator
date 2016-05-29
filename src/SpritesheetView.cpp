@@ -1,4 +1,6 @@
-#include "SpritesheetView.h"
+#include "SpritesheetView.hpp"
+
+#include "Logger.hpp"
 
 namespace sm
 {
@@ -35,7 +37,7 @@ namespace sm
         window->setView(*this);
 
         // Debug
-        std::cout << "SpritesheetView: View resized" << std::endl;
+        LOG("SpritesheetView: View resized");
     }
 
 }

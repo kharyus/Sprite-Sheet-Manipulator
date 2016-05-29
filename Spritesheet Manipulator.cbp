@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Spritesheet Manipulator" />
+		<Option pch_mode="2" />
+		<Option compiler="mingw64_530_compiler" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Sprite Sheet Manipulator (Debug)" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="mingw64_530_compiler" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DSFML_STATIC" />
+					<Add option="-DDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-ltgui-s-d" />
+					<Add library="sfml-audio-s-d" />
+					<Add library="sfml-graphics-s-d" />
+					<Add library="sfml-window-s-d" />
+					<Add library="sfml-network-s-d" />
+					<Add library="sfml-main-d" />
+					<Add library="sfml-system-s-d" />
+					<Add library="openal32" />
+					<Add library="FLAC" />
+					<Add library="vorbisenc" />
+					<Add library="vorbisfile" />
+					<Add library="vorbis" />
+					<Add library="ogg" />
+					<Add library="freetype" />
+					<Add library="jpeg" />
+					<Add library="opengl32" />
+					<Add library="winmm" />
+					<Add library="gdi32" />
+					<Add library="tgui-s-d" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Sprite Sheet Manipulator" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="mingw64_530_compiler" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DSFML_STATIC" />
+					<Add option="-DRELEASE" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-ltgui-s" />
+					<Add option="-static-libgcc" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static" />
+					<Add library="sfml-audio-s" />
+					<Add library="sfml-graphics-s" />
+					<Add library="sfml-window-s" />
+					<Add library="sfml-network-s" />
+					<Add library="sfml-main" />
+					<Add library="sfml-system-s" />
+					<Add library="openal32" />
+					<Add library="FLAC" />
+					<Add library="vorbisenc" />
+					<Add library="vorbisfile" />
+					<Add library="vorbis" />
+					<Add library="ogg" />
+					<Add library="freetype" />
+					<Add library="jpeg" />
+					<Add library="opengl32" />
+					<Add library="winmm" />
+					<Add library="gdi32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add directory="C:/Libraries/SFML-2.3.2-x64-mingw5.3.0/include" />
+			<Add directory="C:/Libraries/TGUI-0.7.0 source/include" />
+			<Add directory="include" />
+		</Compiler>
+		<Linker>
+			<Add directory="C:/Libraries/SFML-2.3.2-x64-mingw5.3.0/lib" />
+			<Add directory="C:/Libraries/TGUI-0.7.0 source/lib" />
+		</Linker>
+		<Unit filename="icon.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="include/Logger.hpp" />
+		<Unit filename="include/Mouse.hpp" />
+		<Unit filename="include/Spritesheet.hpp" />
+		<Unit filename="include/SpritesheetDisplayer.hpp" />
+		<Unit filename="include/SpritesheetView.hpp" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/Mouse.cpp" />
+		<Unit filename="src/Spritesheet.cpp" />
+		<Unit filename="src/SpritesheetDisplayer.cpp" />
+		<Unit filename="src/SpritesheetView.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

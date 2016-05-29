@@ -1,8 +1,8 @@
-#ifndef SPRITESHEETDISPLAYER_H
-#define SPRITESHEETDISPLAYER_H
+#ifndef SPRITESHEETDISPLAYER_HPP
+#define SPRITESHEETDISPLAYER_HPP
 
-#include "Spritesheet.h"
-#include "SpritesheetView.h"
+#include "Spritesheet.hpp"
+#include "SpritesheetView.hpp"
 
 /**
  *  This Class manages everything related to displaying the spritesheet on the window.
@@ -59,4 +59,4 @@ namespace sm
     };
 }
 
-#endif // SPRITESHEETDISPLAYER_H
+#endif // SPRITESHEETDISPLAYER_HPP
