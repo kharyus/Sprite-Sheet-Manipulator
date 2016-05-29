@@ -2,36 +2,23 @@
  *  Author: Crístian Dias de Oliveira
  *  Email: ken-cristian@hotmail.com
  *  Made using SFML(Simple Fast Media Library)
- *  I must make a copyright.
  */
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <iostream>
-#include "Spritesheet.h"
-#include "SpritesheetDisplayer.h"
-#include "SpritesheetView.h"
-#include "Mouse.h"
+#include "Logger.hpp"
+#include "Spritesheet.hpp"
+#include "SpritesheetDisplayer.hpp"
+#include "SpritesheetView.hpp"
+#include "Mouse.hpp"
 #include <TGUI/TGUI.hpp>
 #include "icon.c"
+
+// Windows-specific libraries.
 #if __WIN32__
 #include <windows.h>
 #endif
 
-// OS specific bool - Made to avoid using too many preprocessor directives
-bool windows = false,
-    linux = false;
-
-// Global Flags and variables
-bool flag1 = true,          // If ON automatically unite sprites with colliding bounding boxes
-flag2 = false,              // If ON the method to find the first sprite is the diagonal one, otherwise is the default
-flag3 = false,              // If ON the diagonal method stated above will find sprites utilizing the tallest sprite found on the line. Otherwise it will move through the center(rounded down) of last sprite.
-flag4 = false,              // If ON the sprites will have origins visible and pressing (O)rigin will enter in a mode where the mouse clicks set the origin of chosen sprite.
-flag5 = false;              // If ON when saving the sprites will be saved with transparency.
-//flag6 = true,             // Show numbers on the sprites
-//flag7 = true,             // Allows a sprite to be inside multiple animations
-//flag 8 = true,            // If on the sprite selection must collide with center of the sprite instead of a single pixel.
-
+// Todo: Add functionality.
 // Set the selected group of sprites as an animation
 void setAnimation(std::vector<int> &selectedsprites, std::vector<std::vector<int> > &animations, std::vector<sf::RectangleShape> &rectangles){
     sf::Color color;
@@ -47,10 +34,11 @@ void setAnimation(std::vector<int> &selectedsprites, std::vector<std::vector<int
     }
 }
 
+// Todo: Refactor
 // Opens a window to select a spritesheet to load. Then loads the spritesheet.
 void openFile(sf::RenderWindow *window, sm::SpritesheetDisplayer *spritesheetDisplayer, std::vector<int> *selectedSprites){
     // Windows File Opening
-    if (windows){
+    #ifdef __WIN32__
         const int BUFSIZE = 1024;
         char buffer[BUFSIZE] = {0};
         OPENFILENAME ofns = {0};
@@ -62,57 +50,25 @@ void openFile(sf::RenderWindow *window, sm::SpritesheetDisplayer *spritesheetDis
         if (GetOpenFileName( & ofns ))
             spritesheetDisplayer->loadSpritesheet(buffer, selectedSprites);
         else
-            std::cout << "Did not load.";
-    }
-    else if(linux)
-        std::cout << "This is running on linux" << std::endl;
+            LOG("Did not load.");
+    #elif __linux__
+        LOG("This is running on linux");
+    #endif
 }
 
-/**
- *  TODO: Add the other buttons.
- *  TODO: Add MenuBar.
- *  TODO: Implement Linux opening file system.
- *  Issue: Numbers above sprites causes a lot of performance loss.
- *  TODO: Put zoom in spritesheetView.
- *  Issue: Zoom center wrong when resized.
- *  TODO: When image contains too many sprites or is too big, may add a "This file is too big, are you sure you want to open it?" with a "dont show me this again".
- *  TODO: Add x64 target build.
- *  TODO: Draw icon executable and running program.
- *  TODO: Add option to remove other sprites that are colliding when saving files.
- *  TODO: Add mouse functionality of dragging and dropping a sprite to move it. This is not that useful though, unless i added a save entire spritesheet function.
- *  TODO: Add the flag to merge 2 sprites automatically if they are colliding when parsing.
- *  TODO: Limit how much the view can move, and reset the view when new sprite is loaded.
- *  TODO: Make the transparent button re-parse the spritesheet.
- *  TODO: Add naming system to the sprites, and a list showing the sprites in the interface.
- *  TODO: Add slider to move screen/Another mouse button to move screen.
- *  TODO: Create folder for each spritesheet/Add "Save As" where user decides path. In Save As button can also choose format.
- *  TODO: Make Save button save files as the same extension from the spritesheet.
- *  TODO: (LOW PRIORITY) Ctrl-z Button returns the actions done. Might be a major pain in the behind.
- *  FEEDBACK(not sure if this has purpose): Saving as animations(.gif). SFML might not have support for it.
- *  TODO: If ctrl is being held, add selections to the sprites. If shift is being held remove some sprites from the selection.
- *  TODO: Limit up to which point the camera can go.
- *  TODO: Maybe get rid of TGUI since it's not being that useful. I'm currently creating the button class.
- *  TODO: Put the file opening system into a class or separate it from main.cpp.
- *  TODO: Make a spritesheet file that saves the position of each sprite alongside the image data. Pratically the same thing as generating .json.
- *  TODO: Rescale view to see if resolution gets better.
- *  TODO: Threads for event-driven interface. (It seems i will need to use a c++11 compiler to achieve this, which means i have to build the libraries again.)
- */
-int main(int argc, char* argv[])
-{
-    // Set OS specific variables.
-    #if __WIN32__
-    windows = true;
-    #elif __linux__
-    linux = true;
-    #endif
-
-    // Opens Console only if in Debug mode
-    #if DEBUG
-    // Open console window
+// Open console window
+inline void openConsole(){
     AllocConsole();
     freopen("CONOUT$", "w", stdout);
     //freopen("CONIN$", "r", stdin); // No reason yet to have input in the console.
-    std::cout << "Sprite Sheet Manipulator Started.\n GCC Version: " << __VERSION__ << DEBUG << std::endl;
+    LOG("Sprite Sheet Manipulator Started.\nGCC Version: " << __VERSION__);
+}
+
+int main(int argc, char* argv[])
+{
+    // Open console if DEBUG on.
+    #ifdef DEBUG
+        openConsole();
     #endif // DEBUG
 
     // SFML window
@@ -241,23 +197,7 @@ int main(int argc, char* argv[])
 					spritesheetDisplayer.getView()->move(0,15.0f);
 					zoomview.move(0,15.0f);
 					break;
-                case sf::Keyboard::Num1:
-					flag1 = (flag1) ? false : true;
-					break;
-                case sf::Keyboard::Num2:
-					flag2 = (flag2) ? false : true;
-					break;
-                case sf::Keyboard::Num3:
-					flag3 = (flag3) ? false : true;
-					break;
-                case sf::Keyboard::Num4:
-					flag4 = (flag4) ? false : true;
-					break;
-                case sf::Keyboard::Num5:
-					flag5 = (flag5) ? false : true;
-					break;
                 case sf::Keyboard::Num6:
-                    // Flag 6
 					spritesheetDisplayer.switchShowNumbers();
 					break;
                 case sf::Keyboard::A:
@@ -309,7 +249,7 @@ int main(int argc, char* argv[])
 		window.clear();
 		// Draw all GUI widgets.
 		gui.draw();
-        // Draw black board.
+        // Draw white board.
         spritesheetDisplayer.drawBoard(currentview);
         // Draw spritesheetDisplayer class.
 		spritesheetDisplayer.draw(mouse.getSelectedSprites());

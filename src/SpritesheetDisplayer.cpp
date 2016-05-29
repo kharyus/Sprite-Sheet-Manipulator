@@ -1,4 +1,6 @@
-#include "SpritesheetDisplayer.h"
+#include "SpritesheetDisplayer.hpp"
+
+#include "Logger.hpp"
 
 namespace sm
 {
@@ -105,7 +107,7 @@ namespace sm
         reloadTexture();
         reloadSprite();
 
-        std::cout << "SpritesheetDisplayer: alpha layer set." << std::endl;
+        LOG("SpritesheetDisplayer: alpha layer set.");
     }
 
     /**
